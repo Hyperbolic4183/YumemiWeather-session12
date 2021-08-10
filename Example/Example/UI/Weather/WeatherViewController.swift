@@ -30,7 +30,7 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [unowned self] notification in
-            self.loadWeather(notification.object)
+            loadWeather()
         }
     }
     
@@ -42,7 +42,11 @@ class WeatherViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func loadWeather(_ sender: Any?) {
+    @IBAction func reload(_ sender: Any?) {
+        loadWeather()
+    }
+    
+    private func loadWeather() {
         self.activityIndicator.startAnimating()
         weatherModel.fetchWeather(at: "tokyo", date: Date()) { result in
             DispatchQueue.main.async {
