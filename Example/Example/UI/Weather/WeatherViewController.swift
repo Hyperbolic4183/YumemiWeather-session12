@@ -69,6 +69,8 @@ class WeatherViewController: UIViewController {
                 message = "Jsonエンコードに失敗しました。"
             case .jsonDecodeError:
                 message = "Jsonデコードに失敗しました。"
+            case .invalidParameterError:
+                message = "不適切な値が設定されました"
             case .unknownError:
                 message = "エラーが発生しました。"
             }

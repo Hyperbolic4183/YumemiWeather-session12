@@ -11,5 +11,6 @@ import Foundation
 enum WeatherError: Error {
     case jsonEncodeError
     case jsonDecodeError
+    case invalidParameterError
     case unknownError
 }
