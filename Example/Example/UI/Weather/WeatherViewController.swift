@@ -47,17 +47,37 @@ class WeatherViewController: UIViewController {
     }
     
     private func loadWeather() {
-        self.activityIndicator.startAnimating()
-        weatherModel.fetchWeather(at: "tokyo", date: Date()) { result in
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.handleWeather(result: result)
+        showIndicator {
+            self.weatherModel.fetchWeather(at: "tokyo", date: Date()) { result in
+                DispatchQueue.main.async {
+                    self.handleWeather(result: result)
+                }
+            }
+            self.disasterModel.fetchDisaster { disaster in
+                DispatchQueue.main.async {
+                    self.disasterLabel.text = disaster
+                }
             }
         }
-        disasterModel.fetchDisaster { (disaster) in
-            self.disasterLabel.text = disaster
+    }
+    private func showIndicator(while processings: () -> Void...) {
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue.global()
+        
+        self.activityIndicator.startAnimating()
+        
+        processings.forEach { processing in
+            dispatchQueue.async(group: dispatchGroup) {
+                processing()
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.activityIndicator.stopAnimating()
         }
     }
+    
+    
     
     func handleWeather(result: Result<Response, WeatherError>) {
         switch result {
