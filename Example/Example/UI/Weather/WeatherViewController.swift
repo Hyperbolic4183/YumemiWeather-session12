@@ -60,6 +60,7 @@ class WeatherViewController: UIViewController {
             }
         }
     }
+    
     private func showIndicator(while processings: () -> Void...) {
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue.global()
@@ -76,8 +77,6 @@ class WeatherViewController: UIViewController {
             self.activityIndicator.stopAnimating()
         }
     }
-    
-    
     
     func handleWeather(result: Result<Response, WeatherError>) {
         switch result {
