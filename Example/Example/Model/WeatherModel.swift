@@ -58,8 +58,17 @@ class WeatherModelImpl: WeatherModel {
                 completion(.failure(.unknownError))
                 assertionFailure("予期せぬエラーが発生した")
             }
+        } catch let error as YumemiWeatherError {
+            switch error {
+            case .invalidParameterError:
+                completion(.failure(.invalidParameterError))
+            default:
+                completion(.failure(.unknownError))
+                assertionFailure("予期せぬエラーが発生した")
+            }
         } catch {
-            completion(.failure(.invalidParameterError))
+            completion(.failure(.unknownError))
+            assertionFailure("予期せぬエラーが発生した")
         }
     }
 }
