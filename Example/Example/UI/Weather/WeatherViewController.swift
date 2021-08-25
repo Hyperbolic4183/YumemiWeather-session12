@@ -64,7 +64,7 @@ class WeatherViewController: UIViewController {
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue.global()
         
-        self.activityIndicator.startAnimating()
+        switchView()
         
         processings.forEach { processing in
             dispatchQueue.async(group: dispatchGroup) {
@@ -72,9 +72,15 @@ class WeatherViewController: UIViewController {
             }
         }
         
-        dispatchGroup.notify(queue: .main) {
-            self.activityIndicator.stopAnimating()
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.switchView()
         }
+    }
+    
+    private func switchView() {
+        activityIndicator.toggleAnimation()
+        reloadButton.toggleEnabled()
+        closeButton.toggleEnabled()
     }
     
     func handleWeather(result: Result<Response, WeatherError>) {
