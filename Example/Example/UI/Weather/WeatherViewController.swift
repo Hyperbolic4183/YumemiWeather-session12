@@ -121,3 +121,19 @@ private extension UIImageView {
         }
     }
 }
+
+private extension UIButton {
+    func toggleEnabled() {
+        self.isEnabled = !self.isEnabled
+    }
+}
+
+private extension UIActivityIndicatorView {
+    func toggleAnimation() {
+        if self.isAnimating {
+            self.stopAnimating()
+        } else {
+            self.startAnimating()
+        }
+    }
+}
