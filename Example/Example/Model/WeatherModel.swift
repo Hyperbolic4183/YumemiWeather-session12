@@ -62,9 +62,8 @@ class WeatherModelImpl: WeatherModel {
             switch error {
             case .invalidParameterError:
                 completion(.failure(.invalidParameterError))
-            default:
+            case .unknownError:
                 completion(.failure(.unknownError))
-                assertionFailure("予期せぬエラーが発生した")
             }
         } catch {
             completion(.failure(.unknownError))
