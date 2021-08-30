@@ -69,9 +69,26 @@ class WeatherViewControllerTests: XCTestCase {
 
 class WeatherModelMock: WeatherModel {
     
-    var fetchWeatherImpl: ((Request) throws -> Response)!
+    let weather: Weather
+    let maxTemp: Int
+    let minTemp: Int
+    let response: Response
     
-    func fetchWeather(_ request: Request) throws -> Response {
-        return try fetchWeatherImpl(request)
+    init(weather: Weather) {
+        self.weather = weather
+        self.maxTemp = 40
+        self.minTemp = -40
+        self.response = Response(weather: weather, maxTemp: maxTemp, minTemp: minTemp, date: Date())
+    }
+    
+    init(maxTemp: Int, minTemp: Int) {
+        self.weather = .sunny
+        self.maxTemp = maxTemp
+        self.minTemp = minTemp
+        self.response = Response(weather: weather, maxTemp: maxTemp, minTemp: minTemp, date: Date())
+    }
+
+    func fetchWeather(at area: String, date: Date, completion: @escaping (Result<Response, WeatherError>) -> Void) {
+        completion(.success(response))
     }
 }
