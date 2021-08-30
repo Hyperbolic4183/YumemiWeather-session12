@@ -18,8 +18,8 @@ protocol DisasterModel {
 
 class WeatherViewController: UIViewController {
     
-    var weatherModel: WeatherModel!
-    var disasterModel: DisasterModel!
+    let weatherModel: WeatherModel
+    let disasterModel: DisasterModel
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
@@ -31,6 +31,16 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel) {
+        self.weatherModel = weatherModel
+        self.disasterModel = disasterModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
