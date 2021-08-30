@@ -12,61 +12,80 @@ import YumemiWeather
 
 class WeatherViewControllerTests: XCTestCase {
 
-    var weahterViewController: WeatherViewController!
-    var weahterModel: WeatherModelMock!
-    
-    override func setUpWithError() throws {
-        weahterModel = WeatherModelMock()
-        weahterViewController = R.storyboard.weather.instantiateInitialViewController()!
-        weahterViewController.weatherModel = weahterModel
-        _ = weahterViewController.view
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    var weatherViewController: WeatherViewController!
+    var stackView: UIView!
+    var imageView: UIImageView!
+    var maxTempLabel: UILabel!
+    var minTempLabel: UILabel!
 
     func test_天気予報がsunnyだったらImageViewのImageにsunnyが設定されること_TintColorがredに設定されること() throws {
-        weahterModel.fetchWeatherImpl = { _ in
-            Response(weather: .sunny, maxTemp: 0, minTemp: 0, date: Date())
-        }
+       
+        weatherViewController  = R.storyboard.weather.instantiateInitialViewController { coder in
+            return WeatherViewController(coder: coder, weatherModel: WeatherModelMock(weather: .sunny), disasterModel: DisasterModelImpl())
+        } as? WeatherViewController
         
-        weahterViewController.loadWeather()
-        XCTAssertEqual(weahterViewController.weatherImageView.tintColor, R.color.red())
-        XCTAssertEqual(weahterViewController.weatherImageView.image, R.image.sunny())
+        stackView = getStackView(from: weatherViewController)
+        imageView = getImageView(from: stackView!)
+        
+        weatherViewController.handleWeather(result: .success(Response(weather: .sunny, maxTemp: 0, minTemp: 0, date: Date())))
+        
+        XCTAssertEqual(imageView?.tintColor, R.color.red())
+        XCTAssertEqual(imageView?.image, R.image.sunny())
     }
-    
+
     func test_天気予報がcloudyだったらImageViewのImageにcloudyが設定されること_TintColorがgrayに設定されること() throws {
-        weahterModel.fetchWeatherImpl = { _ in
-            Response(weather: .cloudy, maxTemp: 0, minTemp: 0, date: Date())
-        }
-        
-        weahterViewController.loadWeather()
-        XCTAssertEqual(weahterViewController.weatherImageView.tintColor, R.color.gray())
-        XCTAssertEqual(weahterViewController.weatherImageView.image, R.image.cloudy())
+        let cloudyWeatherViewController = R.storyboard.weather.instantiateInitialViewController { coder in
+            return WeatherViewController(coder: coder, weatherModel: WeatherModelMock(weather: .cloudy), disasterModel: DisasterModelImpl())
+        } as! WeatherViewController
+
+        stackView = getStackView(from: cloudyWeatherViewController)
+        imageView = getImageView(from: stackView!)
+        cloudyWeatherViewController.handleWeather(result: .success(Response(weather: .cloudy, maxTemp: 0, minTemp: 0, date: Date())))
+
+        XCTAssertEqual(imageView?.tintColor, R.color.gray())
+        XCTAssertEqual(imageView?.image, R.image.cloudy())
+    }
+
+    func test_天気予報がrainyだったらImageViewのImageにrainyが設定されること_TintColorがblueに設定されること() throws {
+        let rainyWeatherViewController = R.storyboard.weather.instantiateInitialViewController { coder in
+            return WeatherViewController(coder: coder, weatherModel: WeatherModelMock(weather: .rainy), disasterModel: DisasterModelImpl())
+        } as! WeatherViewController
+
+        stackView = getStackView(from: rainyWeatherViewController)
+        imageView = getImageView(from: stackView!)
+        rainyWeatherViewController.handleWeather(result: .success(Response(weather: .rainy, maxTemp: 0, minTemp: 0, date: Date())))
+
+        XCTAssertEqual(imageView?.tintColor, R.color.blue())
+        XCTAssertEqual(imageView?.image, R.image.rainy())
+    }
+
+    func test_最高気温_最低気温がUILabelに設定されること() throws {
+        let maxTemp = 40
+        let minTemp = -40
+        let tempWeatherViewController = R.storyboard.weather.instantiateInitialViewController { coder in
+            return WeatherViewController(coder: coder, weatherModel: WeatherModelMock(maxTemp: maxTemp, minTemp: minTemp), disasterModel: DisasterModelImpl())
+        } as! WeatherViewController
+        stackView = getStackView(from: tempWeatherViewController)
+        maxTempLabel = getMaxLabel(from: stackView!)
+        minTempLabel = getMinLabel(from: stackView!)
+
+        tempWeatherViewController.handleWeather(result: .success(Response(weather: .sunny, maxTemp: maxTemp, minTemp: minTemp, date: Date())))
+
+        XCTAssertEqual(maxTempLabel?.text, maxTemp.description)
+        XCTAssertEqual(minTempLabel?.text, minTemp.description)
     }
     
-    func test_天気予報がrainyだったらImageViewのImageにrainyが設定されること_TintColorがblueに設定されること() throws {
-        weahterModel.fetchWeatherImpl = { _ in
-            Response(weather: .rainy, maxTemp: 0, minTemp: 0, date: Date())
-        }
+    private func getStackView(from viewController: UIViewController) -> UIView? {
+        let id = R.id.weather.stackViewForImageViewAndLabels
         
-        weahterViewController.loadWeather()
-        XCTAssertEqual(weahterViewController.weatherImageView.tintColor, R.color.blue())
-        XCTAssertEqual(weahterViewController.weatherImageView.image, R.image.rainy())
+        return viewController.view.subviews.filter({$0.accessibilityIdentifier == id}).first
+    }
+    
     private func getImageView(from view: UIView) -> UIImageView? {
         let id = R.id.weather.weatherImageView
         return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UIImageView }).first
     }
     
-    func test_最高気温_最低気温がUILabelに設定されること() throws {
-        weahterModel.fetchWeatherImpl = { _ in
-            Response(weather: .rainy, maxTemp: 100, minTemp: -100, date: Date())
-        }
-        
-        weahterViewController.loadWeather()
-        XCTAssertEqual(weahterViewController.minTempLabel.text, "-100")
-        XCTAssertEqual(weahterViewController.maxTempLabel.text, "100")
     private func getMaxLabel(from view: UIView) -> UILabel? {
         let id = R.id.weather.maxTempLabel
         return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first
