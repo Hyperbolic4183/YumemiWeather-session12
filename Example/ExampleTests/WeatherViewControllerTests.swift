@@ -54,6 +54,9 @@ class WeatherViewControllerTests: XCTestCase {
         weahterViewController.loadWeather()
         XCTAssertEqual(weahterViewController.weatherImageView.tintColor, R.color.blue())
         XCTAssertEqual(weahterViewController.weatherImageView.image, R.image.rainy())
+    private func getImageView(from view: UIView) -> UIImageView? {
+        let id = R.id.weather.weatherImageView
+        return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UIImageView }).first
     }
     
     func test_最高気温_最低気温がUILabelに設定されること() throws {
@@ -64,7 +67,16 @@ class WeatherViewControllerTests: XCTestCase {
         weahterViewController.loadWeather()
         XCTAssertEqual(weahterViewController.minTempLabel.text, "-100")
         XCTAssertEqual(weahterViewController.maxTempLabel.text, "100")
+    private func getMaxLabel(from view: UIView) -> UILabel? {
+        let id = R.id.weather.maxTempLabel
+        return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first
     }
+    
+    private func getMinLabel(from view: UIView) -> UILabel? {
+        let id = R.id.weather.minTempLabel
+        return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first
+    }
+    
 }
 
 class WeatherModelMock: WeatherModel {
