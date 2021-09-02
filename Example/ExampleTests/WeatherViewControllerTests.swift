@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import YumemiWeather
 @testable import Example
 
 class WeatherViewControllerTests: XCTestCase {
@@ -73,27 +72,30 @@ class WeatherViewControllerTests: XCTestCase {
 
         XCTAssertEqual(maxTempLabel?.text, maxTemp.description)
         XCTAssertEqual(minTempLabel?.text, minTemp.description)
+    private func getReloadButton(from view: UIView) -> UIButton {
+        let id = R.id.weather.reloadButton
+        return view.subviews.lazy.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UIButton }).first!
     }
     
-    private func getStackView(from viewController: UIViewController) -> UIView? {
+    private func getStackView(from view: UIView) -> UIView {
         let id = R.id.weather.stackViewForImageViewAndLabels
         
-        return viewController.view.subviews.filter({$0.accessibilityIdentifier == id}).first
+        return view.subviews.lazy.filter({$0.accessibilityIdentifier == id}).first!
     }
     
-    private func getImageView(from view: UIView) -> UIImageView? {
+    private func getImageView(from view: UIView) -> UIImageView {
         let id = R.id.weather.weatherImageView
-        return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UIImageView }).first
+        return view.subviews.lazy.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UIImageView }).first!
     }
     
-    private func getMaxLabel(from view: UIView) -> UILabel? {
+    private func getMaxLabel(from view: UIView) -> UILabel {
         let id = R.id.weather.maxTempLabel
-        return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first
+        return view.subviews.lazy.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first!
     }
     
-    private func getMinLabel(from view: UIView) -> UILabel? {
+    private func getMinLabel(from view: UIView) -> UILabel {
         let id = R.id.weather.minTempLabel
-        return view.subviews.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first
+        return view.subviews.lazy.filter({ $0.accessibilityIdentifier == id }).compactMap({ $0 as? UILabel }).first!
     }
     
 }
