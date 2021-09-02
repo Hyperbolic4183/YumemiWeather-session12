@@ -138,6 +138,11 @@ private extension UIImageView {
             self.tintColor = R.color.blue()
         }
     }
+    
+    func setErrorOccurred() {
+        self.image = UIImage(systemName: "xmark.octagon", withConfiguration: UIImage.SymbolConfiguration(weight: .ultraLight))
+        self.tintColor = .black
+    }
 }
 
 private extension UIButton {
