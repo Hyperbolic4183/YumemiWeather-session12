@@ -110,14 +110,14 @@ class WeatherViewController: UIViewController {
             case .invalidParameterError:
                 message = "不適切な値が設定されました"
             case .unknownError:
-                message = "エラーが発生しました。"
+                message = "天気予報の取得に失敗しました"
             }
             
-            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                self.dismiss(animated: true) {
-                    print("Close ViewController by \(alertController)")
-                }
+                self.weatherImageView.setErrorOccurred()
+                self.maxTempLabel.text = "--"
+                self.minTempLabel.text = "--"
             })
             self.present(alertController, animated: true, completion: nil)
         }
