@@ -28,6 +28,7 @@
 		50C4386524335ACD008269CF /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386424335ACD008269CF /* Response.swift */; };
 		50C4386B24341273008269CF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386A24341273008269CF /* WeatherModel.swift */; };
 		D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */; };
+		D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		50C4386424335ACD008269CF /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		50C4386A24341273008269CF /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelMock.swift; sourceTree = "<group>"; };
+		D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				502BACA7243209E90019B403 /* Weather.storyboard */,
 				502BACA5243209E90019B403 /* WeatherViewController.swift */,
+				D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50C4386524335ACD008269CF /* Response.swift in Sources */,
+				D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */,
 				502BACA6243209E90019B403 /* WeatherViewController.swift in Sources */,
 				500078CD243463EE0077C73E /* RootViewController.swift in Sources */,
 				50C4386B24341273008269CF /* WeatherModel.swift in Sources */,

@@ -12,6 +12,7 @@ class WeatherViewController: UIViewController {
     
     private let weatherModel: WeatherModel
     private let disasterModel: DisasterModel
+    private let weatherHandler: WeatherHandler
     
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
@@ -26,9 +27,10 @@ class WeatherViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel = DisasterModelImpl()) {
+    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel = DisasterModelImpl(), weatherHandler: WeatherHandler = .live) {
         self.weatherModel = weatherModel
         self.disasterModel = disasterModel
+        self.weatherHandler = weatherHandler
         super.init(coder: coder)
     }
     
@@ -86,56 +88,11 @@ class WeatherViewController: UIViewController {
         closeButton.toggleEnabled()
     }
     
-    func handleWeather(result: Result<Response, WeatherError>) {
-        switch result {
-        case .success(let response):
-            self.weatherImageView.set(weather: response.weather)
-            self.minTempLabel.text = String(response.minTemp)
-            self.maxTempLabel.text = String(response.maxTemp)
-            
-        case .failure(let error):
-            let message: String
-            switch error {
-            case .jsonEncodeError:
-                message = "Jsonエンコードに失敗しました。"
-            case .jsonDecodeError:
-                message = "Jsonデコードに失敗しました。"
-            case .invalidParameterError:
-                message = "不適切な値が設定されました"
-            case .unknownError:
-                message = "天気予報の取得に失敗しました"
-            }
-            
-            let alertController = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default))
-            self.weatherImageView.setErrorOccurred()
-            self.maxTempLabel.text = "--"
-            self.minTempLabel.text = "--"
-            self.present(alertController, animated: true, completion: nil)
-        }
+    private func handleWeather(result: Result<Response, WeatherError>) {
+        weatherHandler.handle(self,result)
     }
 }
 
-private extension UIImageView {
-    func set(weather: Weather) {
-        switch weather {
-        case .sunny:
-            self.image = R.image.sunny()
-            self.tintColor = R.color.red()
-        case .cloudy:
-            self.image = R.image.cloudy()
-            self.tintColor = R.color.gray()
-        case .rainy:
-            self.image = R.image.rainy()
-            self.tintColor = R.color.blue()
-        }
-    }
-    
-    func setErrorOccurred() {
-        self.image = UIImage(systemName: "xmark.octagon", withConfiguration: UIImage.SymbolConfiguration(weight: .ultraLight))
-        self.tintColor = .black
-    }
-}
 
 private extension UIButton {
     func toggleEnabled() {
