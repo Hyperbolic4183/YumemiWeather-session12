@@ -8,12 +8,11 @@
 
 import UIKit
 
-}
-
 class WeatherViewController: UIViewController {
     
-    let weatherModel: WeatherModel
-    let disasterModel: DisasterModel
+    private let weatherModel: WeatherModel
+    private let disasterModel: DisasterModel
+    
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
