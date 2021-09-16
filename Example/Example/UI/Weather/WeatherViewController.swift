@@ -8,12 +8,6 @@
 
 import UIKit
 
-protocol WeatherModel {
-    func fetchWeather(at area: String, date: Date, completion: @escaping (Result<Response, WeatherError>) -> Void)
-}
-
-protocol DisasterModel {
-    func fetchDisaster(completion: ((String) -> Void)?)
 }
 
 class WeatherViewController: UIViewController {

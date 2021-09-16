@@ -9,6 +9,11 @@
 import Foundation
 import YumemiWeather
 
+protocol WeatherModel {
+    var delegate: WeatherViewControllerDelegate? { get set }
+    func fetchWeather(at area: String, date: Date)
+}
+
 class WeatherModelImpl: WeatherModel {
     
     private lazy var dateFormatter: DateFormatter = {
