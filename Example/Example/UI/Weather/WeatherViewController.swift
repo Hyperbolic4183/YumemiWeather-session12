@@ -26,7 +26,7 @@ class WeatherViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel) {
+    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel = DisasterModelImpl()) {
         self.weatherModel = weatherModel
         self.disasterModel = disasterModel
         super.init(coder: coder)
