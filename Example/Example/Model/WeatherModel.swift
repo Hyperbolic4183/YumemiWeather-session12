@@ -10,8 +10,7 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherModel {
-    var delegate: WeatherViewControllerDelegate? { get set }
-    func fetchWeather(at area: String, date: Date)
+    func fetchWeather(at area: String, date: Date, completion: @escaping (Result<Response, WeatherError>) -> Void)
 }
 
 class WeatherModelImpl: WeatherModel {
@@ -33,6 +32,19 @@ class WeatherModelImpl: WeatherModel {
         return requestJsonString
     }
     
+    func fetch(from jsonString: String) throws -> String {
+        do {
+            return try YumemiWeather.syncFetchWeather(jsonString)
+        } catch let error as YumemiWeatherError {
+            switch error {
+            case .invalidParameterError:
+                throw WeatherError.invalidParameterError
+            case .unknownError:
+                throw WeatherError.unknownError
+            }
+        }
+    }
+    
     func response(from jsonString: String) throws -> Response {
         guard let responseData = jsonString.data(using: .utf8) else {
             throw WeatherError.jsonDecodeError
@@ -48,31 +60,34 @@ class WeatherModelImpl: WeatherModel {
         let request = Request(area: area, date: date)
         do {
             let requestJson = try jsonString(from: request)
-            let responseJson = try YumemiWeather.syncFetchWeather(requestJson)
+            let responseJson = try fetch(from: requestJson)
             let response = try self.response(from: responseJson)
-            completion(.success(response))
+            DispatchQueue.main.async {
+                completion(.success(response))
+            }
         } catch let error as WeatherError {
             switch error {
             case .jsonEncodeError:
-                completion(.failure(.jsonEncodeError))
-                assertionFailure("エンコードに失敗")
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             case .jsonDecodeError:
-                completion(.failure(.jsonDecodeError))
-                assertionFailure("デコードに失敗")
-            default:
-                completion(.failure(.unknownError))
-                assertionFailure("予期せぬエラーが発生した")
-            }
-        } catch let error as YumemiWeatherError {
-            switch error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             case .invalidParameterError:
-                completion(.failure(.invalidParameterError))
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             case .unknownError:
-                completion(.failure(.unknownError))
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             }
         } catch {
-            completion(.failure(.unknownError))
-            assertionFailure("予期せぬエラーが発生した")
+            DispatchQueue.main.async {
+                completion(.failure(.unknownError))
+            }
         }
     }
 }

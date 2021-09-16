@@ -51,11 +51,11 @@ class WeatherViewController: UIViewController {
     
     private func loadWeather() {
         showIndicator {
-            self.weatherModel.fetchWeather(at: "tokyo", date: Date()) { result in
-                DispatchQueue.main.async {
-                    self.handleWeather(result: result)
-                }
+            
+            self.weatherModel.fetchWeather(at: "tokyo", date: Date()) { [weak self] result in
+                self?.handleWeather(result: result)
             }
+            
             self.disasterModel.fetchDisaster { disaster in
                 DispatchQueue.main.async {
                     self.disasterLabel.text = disaster
