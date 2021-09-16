@@ -11,6 +11,23 @@ import XCTest
 
 class WeatherViewControllerTests: XCTestCase {
     
+
+    //MARK:- WeatherViewControllerの単体テスト
+    func test_WeatherViewControllerが画面を更新する処理を呼ぶこと() {
+        let expectation = Expectation.fetchFailed
+        let weatherModelMock = WeatherModelMock(result: .success(Response(weather: .sunny, maxTemp: 0, minTemp: 0, date: Date())))
+        let weatherViewController = R.storyboard.weather.instantiateInitialViewController (creator: { coder in
+            return WeatherViewController(coder: coder,weatherModel: weatherModelMock)
+        }) as! WeatherViewController
+        weatherViewController.loadViewIfNeeded()
+        weatherModelMock.fetchWeather(at: "", date: Date(), completion: { result in
+            let expectation = Expectation.fetchFailed
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 2)
+    }
+    
+    //MARK:- WeatherViewControllerの結合テスト
     func test_天気予報がsunnyだったらImageViewのImageにsunnyが設定されること_TintColorがredに設定されること() throws {
         let weatherHandler = WeatherHandler.live
         let weatherModelMock = WeatherModelMock(result: .success(Response(weather: .sunny, maxTemp: 0, minTemp: 0, date: Date())))
@@ -77,3 +94,6 @@ class WeatherViewControllerTests: XCTestCase {
     
 }
 
+struct Expectation {
+    static let fetchFailed = XCTestExpectation(description: "fetchFailed")
+}
