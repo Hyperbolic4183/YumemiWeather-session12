@@ -114,11 +114,10 @@ class WeatherViewController: UIViewController {
             }
             
             let alertController = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                self.weatherImageView.setErrorOccurred()
-                self.maxTempLabel.text = "--"
-                self.minTempLabel.text = "--"
-            })
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            self.weatherImageView.setErrorOccurred()
+            self.maxTempLabel.text = "--"
+            self.minTempLabel.text = "--"
             self.present(alertController, animated: true, completion: nil)
         }
     }
