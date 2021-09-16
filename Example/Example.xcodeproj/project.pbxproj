@@ -27,6 +27,7 @@
 		50C4386324335AB8008269CF /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386224335AB8008269CF /* Request.swift */; };
 		50C4386524335ACD008269CF /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386424335ACD008269CF /* Response.swift */; };
 		50C4386B24341273008269CF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386A24341273008269CF /* WeatherModel.swift */; };
+		D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		50C4386224335AB8008269CF /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		50C4386424335ACD008269CF /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		50C4386A24341273008269CF /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		502BACB7243209EA0019B403 /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */,
 				500078C924344E780077C73E /* WeatherViewControllerTests.swift */,
 				502BACB8243209EA0019B403 /* ExampleTests.swift */,
 				502BACBA243209EA0019B403 /* Info.plist */,
@@ -385,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				500078CA24344E780077C73E /* WeatherViewControllerTests.swift in Sources */,
+				D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */,
 				502BACB9243209EA0019B403 /* ExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
