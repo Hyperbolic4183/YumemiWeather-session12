@@ -13,6 +13,8 @@ class WeatherViewController: UIViewController {
     private let weatherModel: WeatherModel
     private let disasterModel: DisasterModel
     private let weatherHandler: WeatherHandler
+    private let mainQueueScheduler: QueueScheduler
+    private let globalQueueScheduler: QueueScheduler
     
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
@@ -27,10 +29,12 @@ class WeatherViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel = DisasterModelImpl(), weatherHandler: WeatherHandler = .live) {
+    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel = DisasterModelImpl(), weatherHandler: WeatherHandler = .live, mainQueueScheduler: QueueScheduler = .main, globalQueueScheduler: QueueScheduler = .global) {
         self.weatherModel = weatherModel
         self.disasterModel = disasterModel
         self.weatherHandler = weatherHandler
+        self.mainQueueScheduler = mainQueueScheduler
+        self.globalQueueScheduler = globalQueueScheduler
         super.init(coder: coder)
     }
     
@@ -50,29 +54,31 @@ class WeatherViewController: UIViewController {
         loadWeather()
     }
     
-    private func loadWeather() {
-        showIndicator {
+    func loadWeather() {
+        showIndicator { [weak self] in
             
-            self.weatherModel.fetchWeather(at: "tokyo", date: Date()) { [weak self] result in
-                self?.handleWeather(result: result)
-            }
-            
-            self.disasterModel.fetchDisaster { disaster in
-                DispatchQueue.main.async {
-                    self.disasterLabel.text = disaster
+            self?.weatherModel.fetchWeather(at: "tokyo", date: Date()) { [weak self] result in
+                self?.mainQueueScheduler.schedule(nil) {
+                    self?.handleWeather(result: result)
                 }
             }
+            
+            self?.disasterModel.fetchDisaster { disaster in
+                self?.mainQueueScheduler.schedule(nil) {
+                    self?.disasterLabel.text = disaster
+                }
+            }
+            
         }
     }
     
     private func showIndicator(while processings: () -> Void...) {
         let dispatchGroup = DispatchGroup()
-        let dispatchQueue = DispatchQueue.global()
         
         switchView()
         
         processings.forEach { processing in
-            dispatchQueue.async(group: dispatchGroup) {
+            globalQueueScheduler.schedule(dispatchGroup) {
                 processing()
             }
         }

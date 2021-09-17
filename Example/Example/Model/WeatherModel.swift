@@ -62,32 +62,20 @@ class WeatherModelImpl: WeatherModel {
             let requestJson = try jsonString(from: request)
             let responseJson = try fetch(from: requestJson)
             let response = try self.response(from: responseJson)
-            DispatchQueue.main.async {
-                completion(.success(response))
-            }
+            completion(.success(response))
         } catch let error as WeatherError {
             switch error {
             case .jsonEncodeError:
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                completion(.failure(error))
             case .jsonDecodeError:
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                completion(.failure(error))
             case .invalidParameterError:
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                completion(.failure(error))
             case .unknownError:
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                completion(.failure(error))
             }
         } catch {
-            DispatchQueue.main.async {
-                completion(.failure(.unknownError))
-            }
+            completion(.failure(.unknownError))
         }
     }
 }
