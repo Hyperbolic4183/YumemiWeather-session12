@@ -9,10 +9,16 @@
 import UIKit
 
 struct WeatherHandler {
-    var handle: (_ viewController: WeatherViewController?, _ result: Result<Response, WeatherError>) -> Void
-}
-
-extension WeatherHandler {
+    private let handle: (_ viewController: WeatherViewController?, _ result: Result<Response, WeatherError>) -> Void
+    
+    init(handle: @escaping (_ viewController: WeatherViewController?, _ result: Result<Response, WeatherError>) -> Void) {
+        self.handle = handle
+    }
+    
+    func handle(from viewController: WeatherViewController, _ result: Result<Response, WeatherError>) {
+        handle(viewController, result)
+    }
+    
     static let live = Self(
         handle: { viewController, result in
             switch result {

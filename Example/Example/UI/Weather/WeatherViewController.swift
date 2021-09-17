@@ -94,7 +94,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func handleWeather(result: Result<Response, WeatherError>) {
-        weatherHandler.handle(self,result)
+        weatherHandler.handle(from: self, result)
     }
 }
 
