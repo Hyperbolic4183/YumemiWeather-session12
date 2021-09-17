@@ -56,15 +56,14 @@ class WeatherViewController: UIViewController {
     
     func loadWeather() {
         showIndicator { [weak self] in
-            
             self?.weatherModel.fetchWeather(at: "tokyo", date: Date()) { [weak self] result in
-                self?.mainQueueScheduler.schedule(nil) {
+                self?.mainQueueScheduler.schedule() {
                     self?.handleWeather(result: result)
                 }
             }
             
             self?.disasterModel.fetchDisaster { disaster in
-                self?.mainQueueScheduler.schedule(nil) {
+                self?.mainQueueScheduler.schedule() {
                     self?.disasterLabel.text = disaster
                 }
             }
@@ -78,7 +77,7 @@ class WeatherViewController: UIViewController {
         switchView()
         
         processings.forEach { processing in
-            globalQueueScheduler.schedule(dispatchGroup) {
+            globalQueueScheduler.schedule(group: dispatchGroup) {
                 processing()
             }
         }
