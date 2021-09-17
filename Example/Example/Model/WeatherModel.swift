@@ -13,7 +13,7 @@ protocol WeatherModel {
     func fetchWeather(at area: String, date: Date, completion: @escaping (Result<Response, WeatherError>) -> Void)
 }
 
-class WeatherModelImpl: WeatherModel {
+final class WeatherModelImpl: WeatherModel {
     
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()

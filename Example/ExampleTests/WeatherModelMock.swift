@@ -9,7 +9,7 @@
 import Foundation
 @testable import Example
 
-class WeatherModelMock: WeatherModel {
+final class WeatherModelMock: WeatherModel {
 
     let result: Result<Response, WeatherError>
     

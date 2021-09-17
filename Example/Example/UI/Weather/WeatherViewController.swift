@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+final class WeatherViewController: UIViewController {
     
     private let weatherModel: WeatherModel
     private let disasterModel: DisasterModel
@@ -19,10 +19,10 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var disasterLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var reloadButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak private var disasterLabel: UILabel!
+    @IBOutlet weak private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak private var reloadButton: UIButton!
+    @IBOutlet weak private var closeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ class WeatherViewController: UIViewController {
         print(#function)
     }
             
-    @IBAction func dismiss(_ sender: Any) {
+    @IBAction private func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -54,7 +54,7 @@ class WeatherViewController: UIViewController {
         loadWeather()
     }
     
-    func loadWeather() {
+    private func loadWeather() {
         showIndicator { [weak self] in
             self?.weatherModel.fetchWeather(at: "tokyo", date: Date()) { [weak self] result in
                 self?.mainQueueScheduler.schedule() {

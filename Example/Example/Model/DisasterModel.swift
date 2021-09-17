@@ -13,7 +13,7 @@ protocol DisasterModel {
     func fetchDisaster(completion: ((String) -> Void)?)
 }
 
-class DisasterModelImpl: DisasterModel {
+final class DisasterModelImpl: DisasterModel {
         
     private let yumemiDisaster: YumemiDisaster
     private var fetchDisasterHandler: ((String) -> Void)?
