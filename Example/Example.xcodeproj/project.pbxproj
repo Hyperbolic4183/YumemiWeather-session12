@@ -29,6 +29,7 @@
 		50C4386B24341273008269CF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386A24341273008269CF /* WeatherModel.swift */; };
 		D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */; };
 		D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */; };
+		D91B1BD926F40D3400BCD284 /* weatherHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */; };
 		D91B1BE126F4187600BCD284 /* QueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BE026F4187600BCD284 /* QueueScheduler.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		50C4386A24341273008269CF /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelMock.swift; sourceTree = "<group>"; };
 		D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandler.swift; sourceTree = "<group>"; };
+		D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandlerMock.swift; sourceTree = "<group>"; };
 		D91B1BE026F4187600BCD284 /* QueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueScheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,8 +187,9 @@
 		502BACB7243209EA0019B403 /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */,
 				500078C924344E780077C73E /* WeatherViewControllerTests.swift */,
+				D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */,
+				D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */,
 				502BACB8243209EA0019B403 /* ExampleTests.swift */,
 				502BACBA243209EA0019B403 /* Info.plist */,
 			);
@@ -398,6 +401,7 @@
 				500078CA24344E780077C73E /* WeatherViewControllerTests.swift in Sources */,
 				D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */,
 				502BACB9243209EA0019B403 /* ExampleTests.swift in Sources */,
+				D91B1BD926F40D3400BCD284 /* weatherHandlerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

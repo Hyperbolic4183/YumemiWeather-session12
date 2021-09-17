@@ -9,7 +9,7 @@
 import UIKit
 
 struct WeatherHandler {
-    var handle: (_ viewController: WeatherViewController, _ result: Result<Response, WeatherError>) -> Void
+    var handle: (_ viewController: WeatherViewController?, _ result: Result<Response, WeatherError>) -> Void
 }
 
 extension WeatherHandler {
@@ -17,9 +17,9 @@ extension WeatherHandler {
         handle: { viewController, result in
             switch result {
             case .success(let response):
-                viewController.weatherImageView.set(weather: response.weather)
-                viewController.minTempLabel.text = String(response.minTemp)
-                viewController.maxTempLabel.text = String(response.maxTemp)
+                viewController?.weatherImageView.set(weather: response.weather)
+                viewController?.minTempLabel.text = String(response.minTemp)
+                viewController?.maxTempLabel.text = String(response.maxTemp)
 
             case .failure(let error):
                 let message: String
@@ -36,10 +36,10 @@ extension WeatherHandler {
 
                 let alertController = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .default))
-                viewController.weatherImageView.setErrorOccurred()
-                viewController.maxTempLabel.text = "--"
-                viewController.minTempLabel.text = "--"
-                viewController.present(alertController, animated: true, completion: nil)
+                viewController?.weatherImageView.setErrorOccurred()
+                viewController?.maxTempLabel.text = "--"
+                viewController?.minTempLabel.text = "--"
+                viewController?.present(alertController, animated: true, completion: nil)
             }
         }
     )
