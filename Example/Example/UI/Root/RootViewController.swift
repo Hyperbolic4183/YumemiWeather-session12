@@ -33,15 +33,3 @@ final class RootViewController: UIViewController {
 
 }
 
-//MARK:- RswiftでstoryboardでDIができるように拡張する
-import Rswift
-public extension StoryboardResourceWithInitialControllerType {
-    
-    @available(iOS 13.0, tvOS 13.0, *)
-    func instantiateInitialViewController<ViewController>(creator: ((NSCoder) -> ViewController?)? = nil) -> UIViewController? where ViewController: UIViewController {
-        UIStoryboard(resource: self).instantiateInitialViewController { coder in
-            creator?(coder)
-        }
-    }
-    
-}

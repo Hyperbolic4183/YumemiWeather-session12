@@ -31,6 +31,7 @@
 		D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */; };
 		D91B1BD926F40D3400BCD284 /* weatherHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */; };
 		D91B1BE126F4187600BCD284 /* QueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BE026F4187600BCD284 /* QueueScheduler.swift */; };
+		D921588526FD497D00214672 /* RswiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921588426FD497D00214672 /* RswiftExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandler.swift; sourceTree = "<group>"; };
 		D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandlerMock.swift; sourceTree = "<group>"; };
 		D91B1BE026F4187600BCD284 /* QueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueScheduler.swift; sourceTree = "<group>"; };
+		D921588426FD497D00214672 /* RswiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RswiftExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		501DEBBF2433584E0015FB44 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D921588426FD497D00214672 /* RswiftExtension.swift */,
 				500078CB243463B30077C73E /* Root */,
 				501DEBC2243359300015FB44 /* Weather */,
 			);
@@ -378,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D921588526FD497D00214672 /* RswiftExtension.swift in Sources */,
 				D91B1BE126F4187600BCD284 /* QueueScheduler.swift in Sources */,
 				50C4386524335ACD008269CF /* Response.swift in Sources */,
 				D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */,
