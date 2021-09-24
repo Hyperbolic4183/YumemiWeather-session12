@@ -27,6 +27,11 @@
 		50C4386324335AB8008269CF /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386224335AB8008269CF /* Request.swift */; };
 		50C4386524335ACD008269CF /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386424335ACD008269CF /* Response.swift */; };
 		50C4386B24341273008269CF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4386A24341273008269CF /* WeatherModel.swift */; };
+		D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */; };
+		D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */; };
+		D91B1BD926F40D3400BCD284 /* weatherHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */; };
+		D91B1BE126F4187600BCD284 /* QueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91B1BE026F4187600BCD284 /* QueueScheduler.swift */; };
+		D921588526FD497D00214672 /* RswiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D921588426FD497D00214672 /* RswiftExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +76,11 @@
 		50C4386224335AB8008269CF /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		50C4386424335ACD008269CF /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		50C4386A24341273008269CF /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelMock.swift; sourceTree = "<group>"; };
+		D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandler.swift; sourceTree = "<group>"; };
+		D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherHandlerMock.swift; sourceTree = "<group>"; };
+		D91B1BE026F4187600BCD284 /* QueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueScheduler.swift; sourceTree = "<group>"; };
+		D921588426FD497D00214672 /* RswiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RswiftExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +121,7 @@
 		501DEBBF2433584E0015FB44 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D921588426FD497D00214672 /* RswiftExtension.swift */,
 				500078CB243463B30077C73E /* Root */,
 				501DEBC2243359300015FB44 /* Weather */,
 			);
@@ -133,6 +144,8 @@
 			children = (
 				502BACA7243209E90019B403 /* Weather.storyboard */,
 				502BACA5243209E90019B403 /* WeatherViewController.swift */,
+				D91B1BB426F2EFB500BCD284 /* weatherHandler.swift */,
+				D91B1BE026F4187600BCD284 /* QueueScheduler.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -178,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				500078C924344E780077C73E /* WeatherViewControllerTests.swift */,
+				D91B1BAC26F2DBF300BCD284 /* WeatherModelMock.swift */,
+				D91B1BD826F40D3400BCD284 /* weatherHandlerMock.swift */,
 				502BACB8243209EA0019B403 /* ExampleTests.swift */,
 				502BACBA243209EA0019B403 /* Info.plist */,
 			);
@@ -366,7 +381,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D921588526FD497D00214672 /* RswiftExtension.swift in Sources */,
+				D91B1BE126F4187600BCD284 /* QueueScheduler.swift in Sources */,
 				50C4386524335ACD008269CF /* Response.swift in Sources */,
+				D91B1BB526F2EFB500BCD284 /* weatherHandler.swift in Sources */,
 				502BACA6243209E90019B403 /* WeatherViewController.swift in Sources */,
 				500078CD243463EE0077C73E /* RootViewController.swift in Sources */,
 				50C4386B24341273008269CF /* WeatherModel.swift in Sources */,
@@ -385,7 +403,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				500078CA24344E780077C73E /* WeatherViewControllerTests.swift in Sources */,
+				D91B1BAD26F2DBF300BCD284 /* WeatherModelMock.swift in Sources */,
 				502BACB9243209EA0019B403 /* ExampleTests.swift in Sources */,
+				D91B1BD926F40D3400BCD284 /* weatherHandlerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

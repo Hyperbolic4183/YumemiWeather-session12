@@ -9,7 +9,11 @@
 import Foundation
 import YumemiWeather
 
-class DisasterModelImpl: DisasterModel {
+protocol DisasterModel {
+    func fetchDisaster(completion: ((String) -> Void)?)
+}
+
+final class DisasterModelImpl: DisasterModel {
         
     private let yumemiDisaster: YumemiDisaster
     private var fetchDisasterHandler: ((String) -> Void)?

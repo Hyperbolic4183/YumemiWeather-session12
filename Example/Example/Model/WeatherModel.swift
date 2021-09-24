@@ -9,7 +9,11 @@
 import Foundation
 import YumemiWeather
 
-class WeatherModelImpl: WeatherModel {
+protocol WeatherModel {
+    func fetchWeather(at area: String, date: Date, completion: @escaping (Result<Response, WeatherError>) -> Void)
+}
+
+final class WeatherModelImpl: WeatherModel {
     
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -28,6 +32,19 @@ class WeatherModelImpl: WeatherModel {
         return requestJsonString
     }
     
+    func fetch(from jsonString: String) throws -> String {
+        do {
+            return try YumemiWeather.syncFetchWeather(jsonString)
+        } catch let error as YumemiWeatherError {
+            switch error {
+            case .invalidParameterError:
+                throw WeatherError.invalidParameterError
+            case .unknownError:
+                throw WeatherError.unknownError
+            }
+        }
+    }
+    
     func response(from jsonString: String) throws -> Response {
         guard let responseData = jsonString.data(using: .utf8) else {
             throw WeatherError.jsonDecodeError
@@ -41,17 +58,24 @@ class WeatherModelImpl: WeatherModel {
     
     func fetchWeather(at area: String, date: Date, completion: @escaping (Result<Response, WeatherError>) -> Void) {
         let request = Request(area: area, date: date)
-        if let requestJson = try? jsonString(from: request) {
-            DispatchQueue.global().async {
-                if let responseJson = try? YumemiWeather.syncFetchWeather(requestJson) {
-                    if let response = try? self.response(from: responseJson) {
-                        completion(.success(response))
-                    }
-                    else {
-                        completion(.failure(WeatherError.jsonDecodeError))
-                    }
-                }
+        do {
+            let requestJson = try jsonString(from: request)
+            let responseJson = try fetch(from: requestJson)
+            let response = try self.response(from: responseJson)
+            completion(.success(response))
+        } catch let error as WeatherError {
+            switch error {
+            case .jsonEncodeError:
+                completion(.failure(error))
+            case .jsonDecodeError:
+                completion(.failure(error))
+            case .invalidParameterError:
+                completion(.failure(error))
+            case .unknownError:
+                completion(.failure(error))
             }
+        } catch {
+            completion(.failure(.unknownError))
         }
     }
 }
