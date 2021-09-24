@@ -29,7 +29,12 @@ final class WeatherViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    init?(coder: NSCoder, weatherModel: WeatherModel, disasterModel: DisasterModel = DisasterModelImpl(), weatherHandler: WeatherHandler = .live, mainQueueScheduler: QueueScheduler = .main, globalQueueScheduler: QueueScheduler = .global) {
+    init?(coder: NSCoder,
+          weatherModel: WeatherModel,
+          disasterModel: DisasterModel = DisasterModelImpl(),
+          weatherHandler: WeatherHandler = .live,
+          mainQueueScheduler: QueueScheduler = .main,
+          globalQueueScheduler: QueueScheduler = .global) {
         self.weatherModel = weatherModel
         self.disasterModel = disasterModel
         self.weatherHandler = weatherHandler

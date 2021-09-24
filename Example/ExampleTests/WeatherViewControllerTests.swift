@@ -31,9 +31,10 @@ class WeatherViewControllerTests: XCTestCase {
     func test_天気予報がsunnyだったらImageViewのImageにsunnyが設定されること_TintColorがredに設定されること() throws {
         let weatherModelMock = WeatherModelMock(result: .success(Response(weather: .sunny, maxTemp: 0, minTemp: 0, date: Date())))
         let weatherViewController = R.storyboard.weather.instantiateInitialViewController (creator: { coder in
-            return WeatherViewController(coder: coder,weatherModel: weatherModelMock, mainQueueScheduler: .immediate, globalQueueScheduler: .immediate)
-        }) as! WeatherViewController
-        
+            return WeatherViewController(coder: coder,
+                                         weatherModel: weatherModelMock,
+                                         mainQueueScheduler: .immediate,
+                                         globalQueueScheduler: .immediate)}) as! WeatherViewController
         weatherViewController.loadViewIfNeeded()
         weatherViewController.reload(nil)
         weatherViewController.view.layoutIfNeeded()
@@ -45,9 +46,10 @@ class WeatherViewControllerTests: XCTestCase {
     func test_天気予報がcloudyだったらImageViewのImageにcloudyが設定されること_TintColorがgrayに設定されること() throws {
         let weatherModelMock = WeatherModelMock(result: .success(Response(weather: .cloudy, maxTemp: 0, minTemp: 0, date: Date())))
         let weatherViewController = R.storyboard.weather.instantiateInitialViewController (creator: { coder in
-            return WeatherViewController(coder: coder,weatherModel: weatherModelMock, mainQueueScheduler: .immediate, globalQueueScheduler: .immediate)
-        }) as! WeatherViewController
-        
+            return WeatherViewController(coder: coder,
+                                         weatherModel: weatherModelMock,
+                                         mainQueueScheduler: .immediate,
+                                         globalQueueScheduler: .immediate)}) as! WeatherViewController
         weatherViewController.loadViewIfNeeded()
         weatherViewController.reload(nil)
         weatherViewController.view.layoutIfNeeded()
@@ -59,9 +61,10 @@ class WeatherViewControllerTests: XCTestCase {
     func test_天気予報がrainyだったらImageViewのImageにrainyが設定されること_TintColorがblueに設定されること() throws {
         let weatherModelMock = WeatherModelMock(result: .success(Response(weather: .rainy, maxTemp: 0, minTemp: 0, date: Date())))
         let weatherViewController = R.storyboard.weather.instantiateInitialViewController (creator: { coder in
-            return WeatherViewController(coder: coder,weatherModel: weatherModelMock, mainQueueScheduler: .immediate, globalQueueScheduler: .immediate)
-        }) as! WeatherViewController
-        
+            return WeatherViewController(coder: coder,
+                                         weatherModel: weatherModelMock,
+                                         mainQueueScheduler: .immediate,
+                                         globalQueueScheduler: .immediate)}) as! WeatherViewController
         weatherViewController.loadViewIfNeeded()
         weatherViewController.reload(nil)
         weatherViewController.view.layoutIfNeeded()
@@ -76,8 +79,10 @@ class WeatherViewControllerTests: XCTestCase {
         
         let weatherModelMock = WeatherModelMock(result: .success(Response(weather: .sunny, maxTemp: maxTemp, minTemp: minTemp, date: Date())))
         let weatherViewController = R.storyboard.weather.instantiateInitialViewController (creator: { coder in
-            return WeatherViewController(coder: coder,weatherModel: weatherModelMock, mainQueueScheduler: .immediate, globalQueueScheduler: .immediate)
-        }) as! WeatherViewController
+            return WeatherViewController(coder: coder,
+                                         weatherModel: weatherModelMock,
+                                         mainQueueScheduler: .immediate,
+                                         globalQueueScheduler: .immediate)}) as! WeatherViewController
         weatherViewController.loadViewIfNeeded()
         weatherViewController.reload(nil)
         weatherViewController.view.layoutIfNeeded()
