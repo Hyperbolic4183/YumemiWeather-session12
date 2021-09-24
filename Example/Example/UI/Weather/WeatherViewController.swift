@@ -94,19 +94,12 @@ final class WeatherViewController: UIViewController {
     
     private func switchView() {
         activityIndicator.toggleAnimation()
-        reloadButton.toggleEnabled()
-        closeButton.toggleEnabled()
+        reloadButton.isEnabled.toggle()
+        closeButton.isEnabled.toggle()
     }
     
     private func handleWeather(result: Result<Response, WeatherError>) {
         weatherHandler.handle(from: self, result)
-    }
-}
-
-
-private extension UIButton {
-    func toggleEnabled() {
-        self.isEnabled = !self.isEnabled
     }
 }
 
